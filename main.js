@@ -210,17 +210,21 @@
         };
 
         jQuery.fn.html = function (value) {
-            var elem = this[0];
+            var elem;
             if (!value) {
+                elem = this[0];
                 if (elem.nodeType === 1) {
                     return elem.innerHTML;
                 }
             } else {
                 if (typeof value === "string") {
-                    elem.innerHTML = value;
+                    for (var i = 0, l = this.length; i < l; i++) {
+                        elem = this[i];
+                        elem.innerHTML = value;
+                    }
                 }
             }
-        }
+        };
 
         return (window.jQuery = window.$ = jQuery);
     })();
