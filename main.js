@@ -203,7 +203,7 @@
             if (jQuery.isFunction(value)) {
                 return this.each(function (i) {
                     var self = jQuery(this);
-                    self.addClass(value.call(this, i, self.attr("class")));
+                    self.addClass(value.call(this, i, self[0].className));
                 });
             }
             return this;
