@@ -209,10 +209,16 @@
             return this;
         };
 
-        jQuery.fn.html = function () {
+        jQuery.fn.html = function (value) {
             var elem = this[0];
-            if (elem.nodeType === 1) {
-                return elem.innerHTML;
+            if (!value) {
+                if (elem.nodeType === 1) {
+                    return elem.innerHTML;
+                }
+            } else {
+                if (typeof value === "string") {
+                    elem.innerHTML = value;
+                }
             }
         }
 
