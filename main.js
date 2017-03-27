@@ -87,11 +87,11 @@
             return obj == null ?
                 String(obj) :
                 class2type[toString.call(obj)] || "object";
-        },
+        };
 
-            jQuery.isFunction = function (obj) {
-                return jQuery.type(obj) === "function";
-            };
+        jQuery.isFunction = function (obj) {
+            return jQuery.type(obj) === "function";
+        };
 
         jQuery.each = function (object, callback, args) {
             var name, i = 0,
@@ -171,6 +171,10 @@
         };
         var rspaces = /\s+/;
 
+        jQuery.fn.each = function (callback, args) {
+            return jQuery.each(this, callback, args);
+        };
+
         jQuery.fn.addClass = function (value) {
             if (value && typeof value === "string") {
                 var classNames = (value || "").split(rspaces);
@@ -196,6 +200,12 @@
                     }
                 }
             }
+            if (jQuery.isFunction(value)) {
+                return this.each(function (i) {
+                    var self = jQuery(this);
+                    self.addClass(value.call(this, i, self.attr("class")));
+                });
+            }
             return this;
         };
 
@@ -203,3 +213,7 @@
     })();
 
 })(window);
+
+//$('.wrapper').addClass(function (index, className) {
+//    return index % 2 ? 'foo bar' : 'foo'
+//});
