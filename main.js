@@ -247,12 +247,18 @@
             }
         }
 
-        jQuery.fn.children = function () {
-            var elem, children;
+        jQuery.fn.children = function (value) {
+            var elem, children = [];
             for (var i = 0, l = this.length; i < l; i++) {
                 elem = this[i];
-                return jQuery(elem.children);
+                children = children.concat(elem.children);
             }
+            if (value && typeof value === "string") {
+                children = children.filter(function (child) {
+                    return child.className.indexOf(value.substring(1)) != -1;
+                });
+            }
+            return jQuery(children);
         }
 
         return (window.jQuery = window.$ = jQuery);
@@ -260,4 +266,4 @@
 
 })(window);
 
-//$('.wrapper').children();
+//$('.wrapper').children('.foo');
