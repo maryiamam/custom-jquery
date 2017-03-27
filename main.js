@@ -226,13 +226,32 @@
             }
         };
 
-        jQuery.fn.attr = function (attrName) {
-            var elem;
+        jQuery.fn.attr = function (attrName, value) {
+            var elem, property;
             if (typeof attrName === "string") {
                 elem = this[0];
                 if (attrName === 'class') {
-                    return elem.className;
+                    property = 'className';
                 }
+                if (attrName === 'name') {
+                    property = 'name';
+                }
+                if (!value) {
+                    return elem[property];
+                } else {
+                    for (var i = 0, l = this.length; i < l; i++) {
+                        elem = this[i];
+                        elem[property] = value;
+                    }
+                }
+            }
+        }
+
+        jQuery.fn.children = function () {
+            var elem, children;
+            for (var i = 0, l = this.length; i < l; i++) {
+                elem = this[i];
+                return jQuery(elem.children);
             }
         }
 
@@ -241,4 +260,4 @@
 
 })(window);
 
-//$('.wrapper').attr('class');
+//$('.wrapper').children();
