@@ -209,11 +209,16 @@
             return this;
         };
 
+        jQuery.fn.html = function () {
+            var elem = this[0];
+            if (elem.nodeType === 1) {
+                return elem.innerHTML;
+            }
+        }
+
         return (window.jQuery = window.$ = jQuery);
     })();
 
 })(window);
 
-//$('.wrapper').addClass(function (index, className) {
-//    return index % 2 ? 'foo bar' : 'foo'
-//});
+//$('.wrapper').html();
