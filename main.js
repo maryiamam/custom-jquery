@@ -226,9 +226,19 @@
             }
         };
 
+        jQuery.fn.attr = function (attrName) {
+            var elem;
+            if (typeof attrName === "string") {
+                elem = this[0];
+                if (attrName === 'class') {
+                    return elem.className;
+                }
+            }
+        }
+
         return (window.jQuery = window.$ = jQuery);
     })();
 
 })(window);
 
-//$('.wrapper').html();
+//$('.wrapper').attr('class');
